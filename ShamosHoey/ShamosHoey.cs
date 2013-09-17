@@ -32,7 +32,6 @@ namespace ShamosHoey
                 switch (currentEvent.Type)
                 {
                     case EventType.SegmentStart:
-                        //Console.WriteLine("Adding {0}", currentEvent.Segment);
                         sweepline.Add(currentEvent.Segment);
                         int i = sweepline.IndexOf(currentEvent.Segment);
                         if (i > 0 && currentEvent.Segment.IntersectsWith(sweepline[0]))
@@ -43,10 +42,8 @@ namespace ShamosHoey
                         {
                             return true;
                         }
-                        //Console.WriteLine(sweepline.Count);
                         break;
                     case EventType.SegmentEnd:
-                        //Console.WriteLine("Removing {0}", currentEvent.Segment);
                         int j = sweepline.IndexOf(currentEvent.Segment);
                         if (j > 0 && j < sweepline.Count - 1 && sweepline[j - 1].IntersectsWith(sweepline[j + 1]))
                         {
@@ -55,25 +52,13 @@ namespace ShamosHoey
                         sweepline.Remove(currentEvent.Segment);
                         break;
                 }
-                //LogSweeplineContents();
             }
             return false;
         }
 
-
-
-        private void LogSweeplineContents()
-        {
-            Console.WriteLine("Sweepline contents:");
-            foreach (var segment in sweepline)
-            {
-                Console.WriteLine(segment);
-            }
-        }
-
         static public int Main(string[] args)
         {
-            int n = 6;
+            int n = 6000;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             List<LineSegment2D> segments = new List<LineSegment2D>();

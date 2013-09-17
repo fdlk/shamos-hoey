@@ -27,3 +27,7 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 *.vssscc
 $tf*/
+*.vcproj.*.user
+*.ncb
+*.aps
+*.suo

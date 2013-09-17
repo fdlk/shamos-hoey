@@ -13,6 +13,8 @@ namespace ShamosHoey
         private Point2D p1;
         private Point2D p2;
 
+        public Point2D P1 { get { return p1; } }
+        public Point2D P2 { get { return p2; } }
         public double X1 { get { return p1.X; } }
         public double Y1 { get { return p1.Y; } }
         public double X2 { get { return p2.X; } }
@@ -66,7 +68,7 @@ namespace ShamosHoey
             // other.p1 is colinear with this segment and other.p1 lies on segment p1p2
             if (o1 == Orientation.Colinear && IntersectsWithColinearPoint(other.p1)) return true;
 
-            // other.p1 is colinear with this segment and other.p2 lies on segment p1p2
+            // other.p2 is colinear with this segment and other.p2 lies on segment p1p2
             if (o2 == Orientation.Colinear && IntersectsWithColinearPoint(other.p2)) return true;
 
             // p1 is colinear with other segment and p1 lies on other segment
@@ -78,14 +80,11 @@ namespace ShamosHoey
             return false; // Doesn't fall in any of the above cases
         }
 
-        // Given three colinear point q, checks if q lies on this line segment
+        // Given colinear point q, checks if q lies on this line segment
         private bool IntersectsWithColinearPoint(Point2D q)
         {
-            if (q.X <= p2.X && q.X >= p1.X &&
-                q.Y <= Math.Max(p1.Y, p2.Y) && q.Y >= Math.Min(p1.Y, p2.Y))
-                return true;
-
-            return false;
+            return q.X <= p2.X && q.X >= p1.X &&
+                q.Y <= Math.Max(p1.Y, p2.Y) && q.Y >= Math.Min(p1.Y, p2.Y);
         }
 
         /**
