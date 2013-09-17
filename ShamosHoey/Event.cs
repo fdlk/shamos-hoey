@@ -30,7 +30,15 @@ namespace ShamosHoey
         {
             get
             {
-                return point;
+                switch (type)
+                {
+                    case EventType.SegmentStart:
+                        return segment.P1;
+                    case EventType.SegmentEnd:
+                        return segment.P2;
+                    default:
+                        throw new System.InvalidOperationException();
+                }
             }
         }
 
@@ -43,17 +51,6 @@ namespace ShamosHoey
         {
             this.segment = segment;
             this.type = type;
-            switch (type)
-            {
-                case EventType.SegmentStart:
-                    point = new Point2D(segment.X1, segment.Y1);
-                    break;
-                case EventType.SegmentEnd:
-                    point = new Point2D(segment.X2, segment.Y2);
-                    break;
-                default:
-                    throw new System.InvalidOperationException();
-            }
         }
         
         public int CompareTo(Event other)
